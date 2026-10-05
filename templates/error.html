@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ baslik }} · Takvim Paneli</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="merkez">
+  <div class="hata-kart">
+    <h1>{{ baslik }}</h1>
+    <p>{{ mesaj }}</p>
+    {% if detay %}<pre>{{ detay }}</pre>{% endif %}
+    <p><a class="buton" href="/">Panele dön</a></p>
+    {% if kurulum %}
+    <p class="ipucu">Adım adım kurulum için proje klasöründeki <strong>KURULUM.md</strong>
+    dosyasındaki yönergeleri izleyin.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

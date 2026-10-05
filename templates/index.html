@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="300">
+  <title>Yaklaşan Etkinlikler</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="sarma">
+  <header>
+    <h1>Yaklaşan Etkinlikler</h1>
+    <p class="hesap">{{ eposta }} <a class="cikis" href="/logout">Çıkış</a></p>
+    <p class="altbilgi">Sonraki 30 gün · sayfa 5 dakikada bir yenilenir</p>
+  </header>
+
+  {% if not gruplar %}
+    <div class="bos">Yaklaşan etkinlik görünmüyor.</div>
+  {% else %}
+    {% for gun in gruplar %}
+    <section class="gun">
+      <h2>{{ gun.baslik }}{% if gun.rozet %}<span class="rozet">{{ gun.rozet }}</span>{% endif %}</h2>
+      {% for e in gun.etkinlikler %}
+      <article class="etkinlik">
+        <span class="nokta" style="background: {{ e.renk }}"></span>
+        <div class="icerik">
+          <div class="satir1">
+            <span class="saat">{{ e.saat_yazi }}</span>
+            <span class="baslik">{{ e.baslik }}</span>
+          </div>
+          <div class="satir2">
+            <span class="takvimadi">{{ e.takvim }}</span>
+            {% if e.yer %}<span class="yer">{{ e.yer }}</span>{% endif %}
+            {% if e.link %}<a class="takvimlink" href="{{ e.link }}" target="_blank" rel="noopener">Takvimde aç</a>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+    {% endfor %}
+  {% endif %}
+</main>
+</body>
+</html>
